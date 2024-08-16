@@ -14,7 +14,22 @@ export class Evolucion extends LitElement {
     super();
     this.pokemon = { evolutions: [] };
     console.log(this.pokemon)
+
+    this._handlePokemonSelected = this._handlePokemonSelected.bind(this);
+    window.addEventListener('pokemon-selected', this._handlePokemonSelected);
   }
+
+disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('pokemon-selected', this._handlePokemonSelected);
+  }
+
+  _handlePokemonSelected(event) {
+    console.log('Received pokemon-selected event with:', event.detail.pokemon);
+    this.pokemon = event.detail.pokemon || { evolutions: [] };
+    this.requestUpdate();
+  }
+
 
   _handlePokemonClick(name) {
     window.history.pushState({}, '', `/edit/${name}`);
@@ -22,7 +37,9 @@ export class Evolucion extends LitElement {
   }
 
   render() {
+
     const evolutions = this.pokemon.evolutions || [];
+
     return html`
       <div>
         <h2>${this.pokemon.name || 'Evolutions'}</h2>

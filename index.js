@@ -41,7 +41,7 @@ export class AppComponent extends LitElement {
         this.currentView = 'list';
         this.pokemonName = null;
         this.editingId = null;
-        this.selectedPokemon = null; // Restablecer el Pokémon seleccionado
+        this.selectedPokemon = null; 
       }
       this.requestUpdate();
     });
