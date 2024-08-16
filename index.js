@@ -23,6 +23,13 @@ export class AppComponent extends LitElement {
     this.editingId = null;
     this.selectedPokemon = null;
     this._handlePopState();
+    this._handlePokemonSelected = this._handlePokemonSelected.bind(this);
+    window.addEventListener('pokemon-selected', this._handlePokemonSelected);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('pokemon-selected', this._handlePokemonSelected);
   }
 
   async _handlePopState() {
@@ -32,7 +39,7 @@ export class AppComponent extends LitElement {
         this.currentView = 'evolucion';
         this.pokemonName = path[2];
         this.editingId = null;
-        await this._fetchPokemonData(this.pokemonName);
+        await this._fetchPokemonData(this.selectedPokemon);
       } else if (path[1] === 'edit') {
         this.currentView = 'edit';
         this.editingId = path[2];
@@ -41,10 +48,19 @@ export class AppComponent extends LitElement {
         this.currentView = 'list';
         this.pokemonName = null;
         this.editingId = null;
-        this.selectedPokemon = null; 
+        this.selectedPokemon = null;
       }
       this.requestUpdate();
     });
+  }
+
+  _handlePokemonSelected(event) {
+    this.selectedPokemon = event.detail.pokemon;
+    this.currentView = 'evolucion';
+    this.requestUpdate();
+    window.history.pushState({}, '', `/pokemon/${this.selectedPokemon.name}`);
+    window.dispatchEvent(new Event('popstate'));
+
   }
 
   async _fetchPokemonData(name) {
@@ -71,7 +87,7 @@ export class AppComponent extends LitElement {
         ${this.currentView === 'list'
           ? html`<pokemon-t></pokemon-t>`
           : this.currentView === 'evolucion'
-            ? html`<evolucion-p .pokemon=${{ name: this.pokemonName }}></evolucion-p>`
+            ? html`<evolucion-p .pokemon=${this.selectedPokemon}></evolucion-p>`
             : this.currentView === 'edit'
               ? html`<edicion-p .pokemonId=${this.editingId}></edicion-p>`
               : html`<div>Page not found</div>`}

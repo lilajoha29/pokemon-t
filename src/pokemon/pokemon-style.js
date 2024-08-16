@@ -37,7 +37,7 @@ export default css`
       margin: 20px;
       position: relative;
       text-align: center;
-      box-shadow: 0 1px 3px rgba(0.0.0 / 0.12);
+      box-shadow: 2px 2px 20px 4px #c7c7c7;
       justify-content: center;
       align-content: center;
     }

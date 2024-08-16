@@ -2,6 +2,7 @@ import { html, LitElement } from 'lit';
 import style from './pokemon-style';
 import '../evolucion/evolucion-p'
 
+
 export class PokemonT extends LitElement {
   static properties = {
     pokemons: { type: Array }
@@ -40,9 +41,20 @@ export class PokemonT extends LitElement {
   }
 
   _handlePokemonClick(name) {
+    const selectedPokemon = this.pokemons.find(pokemon => pokemon.name === name);
+    if (selectedPokemon) {
+      console.log('Emitting pokemon-selected event with:', selectedPokemon);
+      const event = new CustomEvent('pokemon-selected', {
+        detail: { pokemon: selectedPokemon },
+        bubbles: true,
+        composed: true
+      });
+      this.dispatchEvent(event);
+    }
     window.history.pushState({}, '', `/pokemon/${name}`);
     window.dispatchEvent(new Event('popstate'));
   }
+
 
   render() {
     console.log('Rendering with pokemons:', this.pokemons);
@@ -54,10 +66,10 @@ export class PokemonT extends LitElement {
           ? this.pokemons.map(pokemon => html`
             <li class='poke' @click="${() => this._handlePokemonClick(pokemon.name)}">
               <h2>${pokemon.name}</h2>
-              <img src="../assets/pokemon/${pokemon.image}" alt="${pokemon.name}">
+              <img src="../assets/" + "bulbasaur.png" alt="${pokemon.name}">
               <h3>${pokemon.type}</h3>
             </li>`)
-          : html`<li>No Pokémon available</li>`}
+          :  html`<li>No Pokémon available</li>`}
       </ul>
     `;
   }
