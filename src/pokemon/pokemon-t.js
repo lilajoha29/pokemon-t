@@ -1,15 +1,14 @@
 import { html, LitElement } from 'lit';
 import style from './pokemon-style';
-import '../evolucion/evolucion-p'
-
+import '../evolucion/evolucion-p';
 
 export class PokemonT extends LitElement {
   static properties = {
     pokemons: { type: Array }
   };
 
-  static get styles(){
-    return style
+  static get styles() {
+    return style;
   }
 
   constructor() {
@@ -27,7 +26,6 @@ export class PokemonT extends LitElement {
       const result = await response.json();
       console.log('Fetched data:', result);
 
-
       if (Array.isArray(result)) {
         this.pokemons = result;
       } else {
@@ -43,7 +41,7 @@ export class PokemonT extends LitElement {
   _handlePokemonClick(name) {
     const selectedPokemon = this.pokemons.find(pokemon => pokemon.name === name);
     if (selectedPokemon) {
-      console.log('Emitting pokemon-selected event with:', selectedPokemon);
+      console.log('evoluciones l:', selectedPokemon);
       const event = new CustomEvent('pokemon-selected', {
         detail: { pokemon: selectedPokemon },
         bubbles: true,
@@ -55,24 +53,27 @@ export class PokemonT extends LitElement {
     window.dispatchEvent(new Event('popstate'));
   }
 
+  getImageUrl(imageName) {
+    return `/assets/${imageName}`;
+  }
 
   render() {
     console.log('Rendering with pokemons:', this.pokemons);
 
     return html`
-      <div class='title'>Pokémones</div>
-      <ul class='box'>
-        ${this.pokemons.length > 0
-          ? this.pokemons.map(pokemon => html`
-            <li class='poke' @click="${() => this._handlePokemonClick(pokemon.name)}">
-              <h2>${pokemon.name}</h2>
-              <img src="../assets/" + "bulbasaur.png" alt="${pokemon.name}">
-              <h3>${pokemon.type}</h3>
-            </li>`)
-          :  html`<li>No Pokémon available</li>`}
-      </ul>
+        <h1>Pokémon List</h1>
+              ${this.pokemons.map(pokemon => html`
+        <div class='box'>
+          <div class="poke" @click="${() => this._handlePokemonClick(pokemon.name)}">
+            <h2>${pokemon.name}</h2>
+            <p>Type: ${pokemon.type}</p>
+            
+        </div>
+      `)}
     `;
   }
 }
 
 customElements.define('pokemon-t', PokemonT);
+
+

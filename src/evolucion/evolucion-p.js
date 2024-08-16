@@ -24,29 +24,33 @@ export class Evolucion extends LitElement {
   }
 
   _handlePokemonSelected(event) {
-    console.log('Received pokemon-selected event with:', event.detail.pokemon);
+
     this.pokemon = event.detail.pokemon || { evolutions: [] };
     this.requestUpdate();
   }
 
   _handlePokemonClick(name) {
-      const editPokemon = this.pokemon.evolutions.find(pokemon => pokemon.name === name);
-      if (editPokemon) {
-        console.log('edit:', editPokemon);
+      const editionPokemon = this.pokemon.evolutions.find(pokemon => pokemon.name === name);
+      if (editionPokemon) {
+        console.log('edit:', editionPokemon);
         const event = new CustomEvent('pokemon-selected', {
-          detail: { pokemon: editPokemon },
+          detail: { pokemon: editionPokemon },
           bubbles: true,
           composed: true
         });
+        // sessionStorage.setItem("pokemon-nombre", editionPokemon.name);
+        // sessionStorage.setItem("pokemon-type", editionPokemon.type);
         this.dispatchEvent(event);
       }
     window.history.pushState({}, '', `/edit/${name}`);
     window.dispatchEvent(new Event('popstate'));
+
   }
 
   render() {
 
     const evolutions = this.pokemon.evolutions || [];
+    console.log(evolutions)
 
     return html`
       <div class='title'>
@@ -56,7 +60,7 @@ export class Evolucion extends LitElement {
           ${evolutions.length > 0
             ? evolutions.map(evolution => html`
               <li class='pokeE'>
-                <img src="../assets/pokemon/${evolution.image}" alt="${evolution.name}" >
+
                 <div class='info'>
                 <h2>${evolution.name}</h2>
                 <h3>${evolution.type}</h3>

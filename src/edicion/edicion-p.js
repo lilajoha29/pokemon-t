@@ -3,7 +3,6 @@ import style from './edicion-style'
 
 export class EdicionP extends LitElement {
   static properties = {
-    editionId: { type: String },
     edition: { type: Object }
   };
 
@@ -13,36 +12,29 @@ export class EdicionP extends LitElement {
 
   constructor() {
     super();
-    this.edition = { name: '', type: '', active: false }; // Valores predeterminados
-    this.pokemonId = null;
+    this.edition = { edits: [] };
+
+    this._handlePokemonEdit = this._handlePokemonEdit.bind(this);
+    window.addEventListener('pokemon-edit', this._handlePokemonEdit);
   }
 
-  firstUpdated() {
-    this._fetchPokemonData();
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('pokemon-edit', this._handlePokemonEdit);
   }
 
-  async _fetchPokemonData() {
-    if (!this.pokemonId) return;
+  _handlePokemonEdit(event) {
 
-    try {
-      const response = await fetch(`http://localhost:3002/pokemon/${this.pokemonId}`);
-      if (response.ok) {
-        this.edition = await response.json();
-      } else {
-        console.error('Error fetching Pokémon data:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error fetching Pokémon data:', error);
-    }
+    this.pokemon = event.detail.edition || { edits: [] };
+    this.requestUpdate();
   }
+
+    // let pokemonName = sessionStorage.getItem("pokemon-nombre")
+    // let pokemonTipo = sessionStorage.getItem("pokemon-type")
 
   _handleSubmit(event) {
     event.preventDefault();
 
-    console.log('Submitting form with:', this.edition);
-
-    // Aquí deberías enviar los datos actualizados al servidor
-    // Por ejemplo, con una solicitud PUT
     fetch(`http://localhost:3002/pokemon/${this.pokemonId}`, {
       method: 'PUT',
       headers: {
@@ -64,26 +56,32 @@ export class EdicionP extends LitElement {
   }
 
   render() {
+
+    const edits = [this.edition];
+    console.log("a editar", edits)
+
     return html`
       <div class='title'>
         <h2>Edit Pokémon</h2>
         <form class='boxF' @submit="${this._handleSubmit}">
-          <label>
-            Name:
-            <input type="text" name="name" .value="${this.edition.name}" @input="${this._handleInputChange}">
-          </label>
-          <br>
-          <label>
-            Type:
-            <input type="text" name="type" .value="${this.edition.type}" @input="${this._handleInputChange}">
-          </label>
-          <br>
-          <label>
-            Active:
-            <input type="checkbox" name="active" ?checked="${this.edition.active}" @change="${this._handleInputChange}">
-          </label>
-          <br>
-          <button type="submit">Save</button>
+        ${edits.map(edit => html`
+            <label>
+              Name:${edit.name}
+              <input type="text" name="name" .value="${edit.name || ''}" @input="${this._handleInputChange}">
+            </label>
+            <br>
+            <label>
+              Type:
+              <input type="text" name="type" .value="${edit.type || ''}" @input="${this._handleInputChange}">
+            </label>
+            <br>
+            <label>
+              Active:
+              <input type="checkbox" name="active" ?checked="${edit.active || false}" @change="${this._handleInputChange}">
+            </label>
+            <br>
+          `)}
+          <button type="submit">Editar</button>
         </form>
       </div>
     `;

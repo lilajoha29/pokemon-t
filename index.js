@@ -4,12 +4,15 @@ import './src/edicion/edicion-p';
 import './src/pokemon/Pokemon-T';
 import './src/evolucion/evolucion-p';
 
+
 export class AppComponent extends LitElement {
   static properties = {
     currentView: { type: String },
     pokemonName: { type: String },
     editingId: { type: String },
-    selectedPokemon: { type: Object }
+    selectedPokemon: { type: Object },
+    editionPokemon: { type: Object }
+
   };
 
   static get styles(){
@@ -22,14 +25,18 @@ export class AppComponent extends LitElement {
     this.pokemonName = null;
     this.editingId = null;
     this.selectedPokemon = null;
+    this.editionPokemon = null;
     this._handlePopState();
     this._handlePokemonSelected = this._handlePokemonSelected.bind(this);
     window.addEventListener('pokemon-selected', this._handlePokemonSelected);
+    this._handlePokemonEdit = this._handlePokemonEdit.bind(this);
+    window.addEventListener('pokemon-edit', this._handlePokemonEdit);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener('pokemon-selected', this._handlePokemonSelected);
+    window.removeEventListener('pokemon-edit', this._handlePokemonEdit);
   }
 
   async _handlePopState() {
@@ -44,6 +51,7 @@ export class AppComponent extends LitElement {
         this.currentView = 'edit';
         this.editingId = path[2];
         this.pokemonName = null;
+        await this._fetchPokemonData(this.editionPokemon);
       } else {
         this.currentView = 'list';
         this.pokemonName = null;
@@ -63,14 +71,28 @@ export class AppComponent extends LitElement {
 
   }
 
-  async _fetchPokemonData(name) {
+  _handlePokemonEdit(event) {
+    this.selectedPokemon = event.detail.pokemon;
+    this.currentView = 'edit';
+    this.requestUpdate();
+    window.history.pushState({}, '', `/pokemon/${this.editionPokemon.name}`);
+    window.dispatchEvent(new Event('popstate'));
+
+  }
+
+  async _fetchPokemonData(poke) {
+    // let nameSelectedPoke = poke.name
+    //   console.log(nameSelectedPoke)
+    //   console.log(poke.type)
     try {
-      const response = await fetch(`http://localhost:3002/pokemon/${name}`);
+      const response = await fetch(`http://localhost:3002/pokemon/${poke}`);
       if (response.ok) {
         this.selectedPokemon = await response.json();
-      } else {
-        console.error('Error fetching Pokémon data:', response.statusText);
+        this.editionPokemon = await response.json();
       }
+      // else {
+      //   console.error('Error fetching Pokémon data:', response.statusText);
+      // }
     } catch (error) {
       console.error('Error fetching Pokémon data:', error);
     }
@@ -89,7 +111,7 @@ export class AppComponent extends LitElement {
           : this.currentView === 'evolucion'
             ? html`<evolucion-p .pokemon=${this.selectedPokemon}></evolucion-p>`
             : this.currentView === 'edit'
-              ? html`<edicion-p .pokemonId=${this.editingId}></edicion-p>`
+              ? html`<edicion-p .pokemonId=${this.editionPokemon}></edicion-p>`
               : html`<div>Page not found</div>`}
       </div>
     `;
