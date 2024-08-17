@@ -8,7 +8,7 @@ Este proyecto fue desarrollado con Lit-Element usando open-wc y tiene un json el
 https://github.com/lilajoha29/pokemon-t.git
 ```
 
-## Instalacion
+## Instalación
 
  ya clonado instalar las dependencias
 ```bash
