@@ -1,5 +1,6 @@
 import { html, LitElement } from 'lit';
 import style from './evolucion-style.js';
+import '../edicion/edicion-p.js'
 
 export class Evolucion extends LitElement {
   static properties = {
@@ -33,7 +34,7 @@ export class Evolucion extends LitElement {
       const editionPokemon = this.pokemon.evolutions.find(pokemon => pokemon.name === name);
       if (editionPokemon) {
         console.log('edit:', editionPokemon);
-        const event = new CustomEvent('pokemon-selected', {
+        const event = new CustomEvent('pokemon-edit', {
           detail: { pokemon: editionPokemon },
           bubbles: true,
           composed: true
@@ -65,7 +66,7 @@ export class Evolucion extends LitElement {
                 <h2>${evolution.name}</h2>
                 <h3>${evolution.type}</h3>
                 </div>
-                <a class='edit' @click="${() => this._handlePokemonClick(evolution.name)}">Edit</a>
+                <a class='edit' @click="${() => this._handlePokemonClick(evolution.name)}">Editar</a>
               </li>`)
             : html`<li>No evolutions available</li>`}
         </ul>

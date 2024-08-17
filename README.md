@@ -1,35 +1,33 @@
 # \<pokemon-t>
 
-This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
+Este proyecto fue desarrollado con Lit-Element usando open-wc y tiene un json el cual se ejecuta con json server
 
-## Installation
-
-```bash
-npm i pokemon-t
-```
-
-## Usage
-
-```html
-<script type="module">
-  import 'pokemon-t/pokemon-t.js';
-</script>
-
-<pokemon-t></pokemon-t>
-```
-
-
-
-## Tooling configs
-
-For most of the tools, the configuration is in the `package.json` to minimize the amount of files in your project.
-
-If you customize the configuration a lot, you can consider moving them to individual files.
-
-## Local Demo with `web-dev-server`
+## Clonar
 
 ```bash
-npm start
+https://github.com/lilajoha29/pokemon-t.git
 ```
 
-To run a local development server that serves the basic demo located in `demo/index.html`
+## Instalacion
+
+ ya clonado instalar las dependencias
+```bash
+npm i 
+```
+
+## Terminales
+
+Tener disponibles dos terminales
+
+- La primera para ejecutar json server
+```bash
+json-server -w pokemon.json -p 3002  
+```
+- La segunda para ejecutar open-wc
+```bash
+npm run start 
+```
+
+## Desarrollador junior
+
+https://github.com/lilajoha29

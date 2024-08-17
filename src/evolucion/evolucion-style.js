@@ -19,7 +19,6 @@ export default css`
       height: auto;
       display: flex;
       flex-direction: column;
-
       align-items: center;
 
     }
@@ -32,13 +31,15 @@ export default css`
       list-style:none;
       background-color: #4E9B9A;
       display: flex;
+      flex-direction: row;
+      align-items: center;
       height: 250px;
       width: 70%;
       margin: 20px;
+      justify-content: space-around;
       position: relative;
       text-align: center;
       box-shadow: 2px 2px 20px 4px #c7c7c7;
-      justify-content: space-around;
 
     }
 
@@ -68,8 +69,8 @@ export default css`
       display: flex;
       background-color: #f4884a;
       border-radius: 20px;
-      height: 30px;
-      width: 50px;
+      height: 35px;
+      width: 70px;
       padding:10px;
       text-align-last: center;
       align-self: center;
@@ -78,13 +79,24 @@ export default css`
     }
 
     @media (max-width: 1144px)  {
-
+      .pokeE{
+        height: 250px;
+        width: 70%;
+        margin: 20px;
+        flex-direction: row;
+      }
 
 
     }
 
     @media (max-width: 783px)  {
+      .pokeE{
+        height: 250px;
+        width: 70%;
+        margin: 20px;
+        flex-direction: column;
 
+      }
 
     }
 

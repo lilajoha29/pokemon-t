@@ -5,11 +5,12 @@ export default css`
     :host{
       display: block;
       padding-top: 80px;
+
     }
 
     .title{
-      padding:20px;
-        font-size: 30px;
+        padding:20px;
+        font-size: 40px;
         cursor: pointer;
         font-family: "Acme", sans-serif;
     }
@@ -44,11 +45,11 @@ export default css`
 
     h2 {
         font-family: "Acme", sans-serif;
-        font-size: 30px;
+        font-size: 35px;
         font-weight: bold;
     }
 
-    h3 {
+    p {
         font-family: "Acme", sans-serif;
         font-size: 20px;
     }

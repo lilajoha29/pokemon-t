@@ -61,13 +61,15 @@ export class PokemonT extends LitElement {
     console.log('Rendering with pokemons:', this.pokemons);
 
     return html`
-        <h1>Pokémon List</h1>
+        <h1 class="title">Pokémon List</h1>
+        <div class="box">
               ${this.pokemons.map(pokemon => html`
-        <div class='box'>
-          <div class="poke" @click="${() => this._handlePokemonClick(pokemon.name)}">
-            <h2>${pokemon.name}</h2>
-            <p>Type: ${pokemon.type}</p>
-            
+          <div class=''>
+            <div class="poke" @click="${() => this._handlePokemonClick(pokemon.name)}">
+              <h2>${pokemon.name}</h2>
+              <p>${pokemon.type}</p>
+
+          </div>
         </div>
       `)}
     `;
