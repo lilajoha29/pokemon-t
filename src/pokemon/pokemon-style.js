@@ -27,7 +27,6 @@ export default css`
 
     .poke{
       border-radius: 10px;
-      border-color: #d80a0a;
       margin: 10px;
       list-style:none;
       background-color: #4E9B9A;
