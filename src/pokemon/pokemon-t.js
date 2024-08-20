@@ -67,6 +67,7 @@ export class PokemonT extends LitElement {
           <div class=''>
             <div class="poke" @click="${() => this._handlePokemonClick(pokemon.name)}">
               <h2>${pokemon.name}</h2>
+              <img src="src/assets/${pokemon.image+""}">
               <p>${pokemon.type}</p>
 
           </div>

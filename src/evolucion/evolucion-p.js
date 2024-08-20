@@ -66,6 +66,7 @@ export class Evolucion extends LitElement {
                 <h2>${evolution.name}</h2>
                 <h3>${evolution.type}</h3>
                 </div>
+                <img class="image" src="src/assets/${evolution.image+""}">
                 <a class='edit' @click="${() => this._handlePokemonClick(evolution.name)}">Editar</a>
               </li>`)
             : html`<li>No evolutions available</li>`}

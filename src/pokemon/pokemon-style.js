@@ -9,7 +9,7 @@ export default css`
     }
 
     .title{
-        padding:20px;
+        padding:5px;
         font-size: 40px;
         cursor: pointer;
         font-family: "Acme", sans-serif;
@@ -32,8 +32,8 @@ export default css`
       background-color: #4E9B9A;
       border-radius: 20px;
       display: inline-block;
-      height: 250px;
-      width: 250px;
+      height: 350px;
+      width: 350px;
       margin: 20px;
       position: relative;
       text-align: center;
@@ -54,10 +54,10 @@ export default css`
     }
 
     img{
-      width: 100%;
-      height: 200px;
-      padding: 20px;
-      background-color: #d80a0a;
+      width: 50%;
+      height: 50%;
+      padding: 5px;
+
     }
 
     @media (max-width: 1144px)  {
