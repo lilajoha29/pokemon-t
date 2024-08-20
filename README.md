@@ -14,6 +14,7 @@ https://github.com/lilajoha29/pokemon-t.git
 ```bash
 npm i 
 ```
+la versión de node es v20.15.1
 
 ## Terminales
 
