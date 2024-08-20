@@ -77,23 +77,18 @@ export class AppComponent extends LitElement {
     this.requestUpdate();
     window.history.pushState({}, '', `/edit/${this.editionPokemon.name}`);
     window.dispatchEvent(new Event('popstate'));
-    console.log("datos para editar",this.editionPokemon)
 
   }
 
   async _fetchPokemonData(pokemonId) {
-    console.log('Fetching data for:', pokemonId);
     try {
       const response = await fetch(`http://localhost:3002/pokemon/${pokemonId}`);
       if (response.ok) {
         const data = await response.json();
         if (this.currentView === 'edit') {
           this.editionPokemon = data;
-          console.log('Data fetched for editing:', this.editionPokemon);
         } else {
           this.selectedPokemon = data;
-          console.log('Data fetched for selection:', this.selectedPokemon);
-
         }
       }
     } catch (error) {
@@ -114,7 +109,7 @@ export class AppComponent extends LitElement {
           : this.currentView === 'evolucion'
             ? html`<evolucion-p .pokemon=${this.selectedPokemon}></evolucion-p>`
             : this.currentView === 'edit'
-              ? html`<edicion-p .pokemon=${this.editionPokemon}></edicion-p>`
+              ? html`<edicion-p .edition=${this.editionPokemon}></edicion-p>`
               : html`<div>Page not found</div>`}
       </div>
     `;

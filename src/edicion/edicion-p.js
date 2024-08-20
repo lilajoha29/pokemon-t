@@ -10,14 +10,10 @@ export class EdicionP extends LitElement {
 
   static get styles(){
     return style;
-
   }
 
   constructor() {
     super();
-    // this.edition = { edits: [] };
-    this.edition = { name: '', type: '', active: false };
-    console.log('Constructor:', this.edition);
 
     this.showModal = false;
 
@@ -31,16 +27,9 @@ export class EdicionP extends LitElement {
   }
 
   _handlePokemonEdit(event) {
-    console.log('Received event data edit:', event.detail.pokemon);
-    // this.edition = event.detail.edition || { edits: [] };
     this.edition = event.detail.pokemon || { name: '', type: '', active: false };
     this.requestUpdate();
-
   }
-
-    // let pokemonName = sessionStorage.getItem("pokemon-nombre")
-    // let pokemonTipo = sessionStorage.getItem("pokemon-type")
-
 
 
   _handleInputChange(event) {
@@ -66,7 +55,6 @@ export class EdicionP extends LitElement {
 
   render() {
     const { name, type, active } = this.edition;
-    console.log("a editar", this.edition);
 
     return html`
       <div class='title'>

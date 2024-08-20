@@ -24,7 +24,6 @@ export class PokemonT extends LitElement {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const result = await response.json();
-      console.log('Fetched data:', result);
 
       if (Array.isArray(result)) {
         this.pokemons = result;
@@ -41,7 +40,6 @@ export class PokemonT extends LitElement {
   _handlePokemonClick(name) {
     const selectedPokemon = this.pokemons.find(pokemon => pokemon.name === name);
     if (selectedPokemon) {
-      console.log('evoluciones l:', selectedPokemon);
       const event = new CustomEvent('pokemon-selected', {
         detail: { pokemon: selectedPokemon },
         bubbles: true,
@@ -58,7 +56,6 @@ export class PokemonT extends LitElement {
   }
 
   render() {
-    console.log('Rendering with pokemons:', this.pokemons);
 
     return html`
         <h1 class="title">Pokémones</h1>
