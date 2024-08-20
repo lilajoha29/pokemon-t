@@ -70,7 +70,7 @@ export class EdicionP extends LitElement {
 
     return html`
       <div class='title'>
-        <h2>Edit Pokémon</h2>
+        <h2>Editar Pokémon</h2>
         <form class='boxF' @submit="${this._handleSubmit}">
           <label>
             Nombre:
