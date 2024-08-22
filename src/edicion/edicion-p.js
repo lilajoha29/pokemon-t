@@ -1,11 +1,17 @@
 import { LitElement, html } from 'lit-element';
 import style from './edicion-style'
-import './modal/modal-e'
+import './modal/modal-e';
+import { router } from "../../router.js"
+
 
 export class EdicionP extends LitElement {
   static properties = {
-    edition: { type: Object },
-    showModal: { type: Boolean }
+
+    showModal: { type: Boolean },
+    active: { type: Boolean },
+    name: { type: String, state: true },
+    type: { type: String, state: true },
+    edicion: { type: Array, state: true },
   };
 
   static get styles(){
@@ -16,32 +22,45 @@ export class EdicionP extends LitElement {
     super();
 
     this.showModal = false;
-
-    this._handlePokemonEdit = this._handlePokemonEdit.bind(this);
-    window.addEventListener('pokemon-edit', this._handlePokemonEdit);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    window.removeEventListener('pokemon-edit', this._handlePokemonEdit);
-  }
-
-  _handlePokemonEdit(event) {
-    this.edition = event.detail.pokemon || { name: '', type: '', active: false };
-    this.requestUpdate();
+    this.active = false;
   }
 
 
-  _handleInputChange(event) {
-    const { name, value, type, checked } = event.target;
-    this.edition = {
-      ...this.edition,
-      [name]: type === 'checkbox' ? checked : value
-    };
-    if (name === 'active' && checked) {
+
+  async _get_data() {
+    const pokemon_name = router.location.params.name;
+    const evolucion_name = router.location.params.evolution_name;
+
+    await fetch("http://localhost:3002/pokemon?name=" + pokemon_name).then(
+        (res) => res.json()
+    ).then((evoluciones) => {
+
+      const { evolutions } = evoluciones[0];
+      const _serch = evolutions.find(evol => evol.name == evolucion_name)
+        this.name = _serch.name;
+        this.type = _serch.type;
+        this.edicion = _serch;
+
+    });
+}
+
+connectedCallback() {
+  super.connectedCallback()
+  this._get_data();
+
+}
+
+_handleInputChange(event) {
+  const { name, value, type, checked } = event.target;
+  if (name === 'active') {
+    this.active = checked;
+    if (checked) {
       this.showModal = true;
     }
+  } else {
+    this[name] = type === 'checkbox' ? checked : value;
   }
+}
 
   _handleModalClose() {
     this.showModal = false;
@@ -54,28 +73,30 @@ export class EdicionP extends LitElement {
   }
 
   render() {
-    const { name, type, active } = this.edition;
+
 
     return html`
       <div class='title'>
         <h2>Editar Pokémon</h2>
         <form class='boxF' @submit="${this._handleSubmit}">
+        ${this.edicion && html`
           <label>
             Nombre:
-            <input type="text" name="name" .value="${name || ''}" @input="${this._handleInputChange}">
+            <input type="text" name="name" .value="${this.name}" >
           </label>
           <br>
           <label>
             Tipo:
-            <input type="text" name="type" .value="${type || ''}" @input="${this._handleInputChange}">
+            <input type="text" name="type" .value="${this.type}">
           </label>
           <br>
+          `}
           <label>
             Pokemon repetido:
-            <input type="checkbox" name="active" ?checked="${active || false}" @change="${this._handleInputChange}">
+            <input type="checkbox" name="active" ?checked="${this.active}" @change="${this._handleInputChange}">
           </label>
           <br>
-          <a class="edition" type="submit">Editar</a>
+          <a class="edition" type="submit"> Editar</a>
         </form>
       </div>
 

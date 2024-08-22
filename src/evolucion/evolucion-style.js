@@ -12,6 +12,8 @@ export default css`
       font-size: 30px;
       cursor: pointer;
       font-family: "Acme", sans-serif;
+      text-decoration: none;
+      color: #000000;
     }
 
     .boxE{
@@ -47,10 +49,18 @@ export default css`
       align-content: center;
     }
 
+    h1{
+      font-family: "Acme", sans-serif;
+        font-size: 60px;
+        font-weight: bold;
+        text-align: center;
+    }
+
     h2 {
         font-family: "Acme", sans-serif;
         font-size: 30px;
         font-weight: bold;
+        text-align: center;
     }
 
     h3 {
@@ -77,6 +87,8 @@ export default css`
       align-self: center;
       text-align:center;
       box-shadow: 2px 2px 80px 20px #757575;
+      font-family: "Acme", sans-serif;
+      font-size: 30px;
     }
 
     @media (max-width: 1144px)  {

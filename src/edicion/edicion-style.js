@@ -32,13 +32,18 @@ export default css`
 
     input{
       width:auto;
-      height: 25px;
+      height: 30px;
       border-color: #F07128;
+      border: solid;
       border-style: 10px solid;
       border-radius: 10px;
       border: 60px;
-      background-color: #efba9b
+      background-color: #efba9b;
 
+    }
+
+    input[type="checkbox"]{
+      background-color:#F07128;
     }
 
     .edition{

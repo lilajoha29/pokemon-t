@@ -9,7 +9,7 @@ export default css`
     }
 
     .title{
-        padding:5px;
+        padding:30px;
         font-size: 40px;
         cursor: pointer;
         font-family: "Acme", sans-serif;
@@ -40,6 +40,11 @@ export default css`
       box-shadow: 2px 2px 20px 4px #c7c7c7;
       justify-content: center;
       align-content: center;
+    }
+
+    a{
+      text-decoration: none;
+      color: #000000;
     }
 
     h2 {

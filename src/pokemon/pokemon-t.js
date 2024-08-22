@@ -2,6 +2,7 @@ import { html, LitElement } from 'lit';
 import style from './pokemon-style';
 import '../evolucion/evolucion-p';
 
+
 export class PokemonT extends LitElement {
   static properties = {
     pokemons: { type: Array }
@@ -35,25 +36,32 @@ export class PokemonT extends LitElement {
       console.error('Error fetching data:', error);
       this.pokemons = [];
     }
+
   }
 
-  _handlePokemonClick(name) {
-    const selectedPokemon = this.pokemons.find(pokemon => pokemon.name === name);
-    if (selectedPokemon) {
-      const event = new CustomEvent('pokemon-selected', {
-        detail: { pokemon: selectedPokemon },
-        bubbles: true,
-        composed: true
-      });
-      this.dispatchEvent(event);
-    }
-    window.history.pushState({}, '', `/pokemon/${name}`);
-    window.dispatchEvent(new Event('popstate'));
-  }
+  connectedCallback() {
+    super.connectedCallback()
+    this.fetchData();
+}
 
-  getImageUrl(imageName) {
-    return `/assets/${imageName}`;
-  }
+  // _handlePokemonClick(name) {
+  //   const selectedPokemon = this.pokemons.find(pokemon => pokemon.name === name);
+  //   if (selectedPokemon) {
+  //     const event = new CustomEvent('pokemon-selected', {
+  //       detail: { pokemon: selectedPokemon },
+  //       bubbles: true,
+  //       composed: true
+  //     });
+  //     this.dispatchEvent(event);
+  //     console.log(selectedPokemon)
+  //   }
+  //   window.history.pushState({}, '', `/pokemon/${name}`);
+  //   window.dispatchEvent(new Event('popstate'));
+  // }
+
+
+  // @click="${() => this._handlePokemonClick(pokemon.name)}"
+
 
   render() {
 
@@ -62,12 +70,13 @@ export class PokemonT extends LitElement {
         <div class="box">
               ${this.pokemons.map(pokemon => html`
           <div class=''>
-            <div class="poke" @click="${() => this._handlePokemonClick(pokemon.name)}">
+            <a class="poke"
+            href=${"/evolucion/" + pokemon.name}>
               <h2>${pokemon.name}</h2>
               <img src="src/assets/${pokemon.image+""}">
               <p>${pokemon.type}</p>
 
-          </div>
+          </a>
         </div>
       `)}
     `;
