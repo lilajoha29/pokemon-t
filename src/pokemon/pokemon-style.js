@@ -42,6 +42,10 @@ export default css`
       align-content: center;
     }
 
+    .poke:hover{
+      box-shadow: 2px 2px 80px 20px #29F0EF;
+    }
+
     a{
       text-decoration: none;
       color: #000000;
@@ -64,6 +68,11 @@ export default css`
       padding: 5px;
 
     }
+
+    img:hover{
+        transform: scale(2.1);
+      }
+
 
     @media (max-width: 1144px)  {
 

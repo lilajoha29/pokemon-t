@@ -42,8 +42,10 @@ export default css`
 
     }
 
-    input[type="checkbox"]{
+    .check{
+      border-color: #F07128;
       background-color:#F07128;
+      align-content: center;
     }
 
     .edition{
@@ -56,6 +58,9 @@ export default css`
       text-align-last: center;
       align-self: center;
       text-align:center;
-      box-shadow: 2px 2px 80px 20px #757575;
+    }
+
+    .edition:hover{
+      box-shadow: 2px 2px 80px 20px #f4884a;
     }
 `

@@ -14,6 +14,7 @@ export default css`
       font-family: "Acme", sans-serif;
       text-decoration: none;
       color: #000000;
+
     }
 
     .boxE{
@@ -22,7 +23,7 @@ export default css`
       display: flex;
       flex-direction: column;
       align-items: center;
-
+      padding:30px;
     }
 
     .pokeE{
@@ -42,7 +43,10 @@ export default css`
       position: relative;
       text-align: center;
       box-shadow: 2px 2px 20px 4px #c7c7c7;
+    }
 
+    .pokeE:hover{
+      box-shadow: 2px 2px 80px 20px #29F0EF;
     }
 
     .info{
@@ -72,7 +76,10 @@ export default css`
       width: 200px;
       height: 200px;
       padding: 5px;
+    }
 
+    .image:hover {
+      transform: scale(1.7);
     }
 
     .edit{
@@ -86,42 +93,57 @@ export default css`
       text-align-last: center;
       align-self: center;
       text-align:center;
-      box-shadow: 2px 2px 80px 20px #757575;
       font-family: "Acme", sans-serif;
       font-size: 30px;
+      text-decoration: none;
+      color: #000000;
+    }
+
+    .edit:hover{
+      box-shadow: 2px 2px 80px 20px #f4884a;
     }
 
     @media (max-width: 1144px)  {
+      .boxE{
+        padding: inherit;
+      }
+
       .pokeE{
         height: 400px;
         width: 350px;
-        margin: 20px;
+        margin: 10px;
         flex-direction: column;
       }
       .image{
       width: 150px;
       height: 150px;
-
-
+    }
+    .image:hover {
+      transform: scale(1.1);
     }
 
     }
 
     @media (max-width: 783px)  {
+      .boxE{
+        padding: inherit;
+      }
+
       .pokeE{
         height: 400px;
         width: 350px;
-        margin: 20px;
+        margin: 10px;
         flex-direction: column;
-
       }
+
       .image{
       width: 150px;
       height: 150px;
-
-
     }
 
+    .image:hover {
+      transform: scale(1.5);
+    }
     }
 
 `

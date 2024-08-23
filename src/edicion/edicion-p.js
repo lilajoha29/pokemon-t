@@ -6,7 +6,6 @@ import { router } from "../../router.js"
 
 export class EdicionP extends LitElement {
   static properties = {
-
     showModal: { type: Boolean },
     active: { type: Boolean },
     name: { type: String, state: true },
@@ -93,7 +92,7 @@ _handleInputChange(event) {
           `}
           <label>
             Pokemon repetido:
-            <input type="checkbox" name="active" ?checked="${this.active}" @change="${this._handleInputChange}">
+            <input class="check" type="checkbox" name="active" ?checked="${this.active}" @change="${this._handleInputChange}">
           </label>
           <br>
           <a class="edition" type="submit"> Editar</a>

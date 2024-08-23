@@ -44,23 +44,7 @@ export class PokemonT extends LitElement {
     this.fetchData();
 }
 
-  // _handlePokemonClick(name) {
-  //   const selectedPokemon = this.pokemons.find(pokemon => pokemon.name === name);
-  //   if (selectedPokemon) {
-  //     const event = new CustomEvent('pokemon-selected', {
-  //       detail: { pokemon: selectedPokemon },
-  //       bubbles: true,
-  //       composed: true
-  //     });
-  //     this.dispatchEvent(event);
-  //     console.log(selectedPokemon)
-  //   }
-  //   window.history.pushState({}, '', `/pokemon/${name}`);
-  //   window.dispatchEvent(new Event('popstate'));
-  // }
-
-
-  // @click="${() => this._handlePokemonClick(pokemon.name)}"
+  
 
 
   render() {
