@@ -75,8 +75,8 @@ _handleInputChange(event) {
 
 
     return html`
-      <div class='title'>
-        <h2>Editar Pokémon</h2>
+      <div class='formul'>
+        <h2 class="title">Editar Pokémon</h2>
         <form class='boxF' @submit="${this._handleSubmit}">
         ${this.edicion && html`
           <label>

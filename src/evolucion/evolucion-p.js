@@ -59,7 +59,7 @@ connectedCallback() {
                 <img class="image" src="src/assets/${evolution.image+""}">
                 <a class='edit' href=${"/edicion/" + this.name + "/" + evolution.name}>Editar</a>
               </li>`)
-            : html`<li>No evolutions available</li>`}
+            : html`<li>Este pokémon no tiene evoluciones</li>`}
         </ul>
       </div>
     `;

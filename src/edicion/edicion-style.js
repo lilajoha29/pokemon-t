@@ -7,15 +7,22 @@ export default css`
       padding-top: 80px;
     }
 
+    .formul{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .title{
       padding:20px;
-      font-size: 30px;
+      font-size: 40px;
       cursor: pointer;
       font-family: "Acme", sans-serif;
+      text-align: center;
     }
 
     .boxF{
-      width: auto;
+      width: 500px;
       height: auto;
       display: flex;
       flex-direction: column;
@@ -24,26 +31,35 @@ export default css`
       background-color: #4E9B9A;
       padding-top: 30px;
       padding-bottom: 30px;
+      box-shadow: 2px 2px 20px 4px #c7c7c7;
     }
 
     label{
-      align-content: center;
+      width:300px;
+      display: flex;
+      flex-direction: column;
+      align-content: space-around;
+      font-size: 30px;
+      cursor: pointer;
+      font-family: "Acme", sans-serif;
+      justify-content: space-around;
     }
 
     input{
       width:auto;
       height: 30px;
       border-color: #F07128;
-      border: solid;
-      border-style: 10px solid;
+      border-style: 100px solid;
       border-radius: 10px;
-      border: 60px;
       background-color: #efba9b;
-
+      font-family: "Acme", sans-serif;
+      padding: 5px;
     }
 
     .check{
+
       border-color: #F07128;
+      border-style: 100px solid;
       background-color:#F07128;
       align-content: center;
     }
@@ -58,9 +74,53 @@ export default css`
       text-align-last: center;
       align-self: center;
       text-align:center;
+      font-family: "Acme", sans-serif;
+      font-size: 30px;
     }
 
     .edition:hover{
       box-shadow: 2px 2px 80px 20px #f4884a;
     }
+
+    @media (max-width: 1144px)  {
+
+      .boxF {
+        width: 500px;
+
+      }
+
+      label{
+        width: auto;
+        font-size: 30px;
+
+      }
+
+      input{
+        width: 250px;
+
+
+      }
+
+    }
+
+    @media (max-width: 783px)  {
+
+      .boxF {
+        width: 400px;
+
+      }
+
+      label{
+        width: auto;
+        font-size: 30px;
+
+      }
+
+      input{
+        width: 250px;
+
+
+      }
+
+}
 `
